@@ -31,3 +31,6 @@ tsconfig.tsbuildinfo
 
 # Test Coverage
 coverage
+
+# env
+*.local
