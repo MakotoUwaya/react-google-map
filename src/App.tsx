@@ -1,4 +1,17 @@
-import { APIProvider, Map as GoogleMap } from '@vis.gl/react-google-maps';
+import { APIProvider, Map as GoogleMap, useMap } from '@vis.gl/react-google-maps';
+import { useEffect } from 'react';
+
+const MyComponent = () => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+
+    console.info(map.getZoom());
+  }, [map]);
+
+  return <></>;
+};
 
 export function App() {
   return (
@@ -10,6 +23,7 @@ export function App() {
         gestureHandling={'greedy'}
         disableDefaultUI={true}
       />
+      <MyComponent />
     </APIProvider>
   );
 }
