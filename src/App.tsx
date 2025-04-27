@@ -1,4 +1,10 @@
-import { APIProvider, Map as GoogleMap, useMap } from '@vis.gl/react-google-maps';
+import {
+  APIProvider,
+  Map as GoogleMap,
+  Marker,
+  useMap,
+  useMarkerRef,
+} from '@vis.gl/react-google-maps';
 import { useEffect } from 'react';
 
 const MyComponent = () => {
@@ -14,6 +20,15 @@ const MyComponent = () => {
 };
 
 export function App() {
+  const [markerRef, marker] = useMarkerRef();
+
+  useEffect(() => {
+    if (!marker) {
+      return;
+    }
+
+    marker.setPosition({ lat: 35.6546154410643, lng: 139.723040338637 });
+  }, [marker]);
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAP_API_KEY}>
       <GoogleMap
@@ -22,7 +37,10 @@ export function App() {
         defaultZoom={16}
         gestureHandling={'greedy'}
         disableDefaultUI={true}
-      />
+      >
+        <Marker ref={markerRef} />
+      </GoogleMap>
+
       <MyComponent />
     </APIProvider>
   );
